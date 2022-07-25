@@ -87,6 +87,7 @@ class StripAPIView(APIView):
             html_content = '<p>' + data.name + '</p>' + '<p>' + str(data.amount) + '</p>' + \
                            '<p>' + data.project_name + '</p>' + '<p>' + str(checkout_session_url) + '</p>'
             send_mail(subject, html_content, 'from@example.com', [data.email], fail_silently=False,)
+            return redirect(checkout_session.url)
 
         except:
             return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
